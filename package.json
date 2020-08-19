@@ -1,0 +1,21 @@
+{
+  "name": "echarts-wechat-remax",
+  "private": true,
+  "version": "1.0.0",
+  "description": "echarts for wechat 在remax",
+  "main": "index.js",
+  "keywords": [],
+  "author": "maqi <maqi1@wufeng-network.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "remax build -t wechat -w",
+    "build": "cross-env NODE_ENV=production remax build -t wechat"
+  },
+  "dependencies": {
+    "react": "^16.12.0",
+    "remax": "^2.6.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
+}
