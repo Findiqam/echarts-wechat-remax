@@ -5,6 +5,7 @@ import { ecTool } from "../../components/ec-canvas";
 
 export default () => {
   const [useGlobalThemes, setUseGlobalThemes] = useState(false);
+  const [count, setCount] = useState(0);
   return (
     <View className={ styles.app }>
       <Button
@@ -38,7 +39,15 @@ export default () => {
             url: '/pages/dynamicUpdate/index'
           })
         } }
-      >动态改变数据</Button>
+      >ecTool动态改变数据</Button>
+      <Button
+        className={ styles.buttonBottom }
+        onClick={ () => {
+          navigateTo({
+            url: '/pages/dynamicUpdateII/index'
+          })
+        } }
+      >通过属性动态改变数据</Button>
       <Button
         className={ styles.buttonBottom }
         onClick={ () => {
@@ -46,7 +55,15 @@ export default () => {
             url: '/pages/reloadUpdate/index'
           })
         } }
-      >销毁重新加载改变数据</Button>
+      >销毁-改变数据(ecTool)-重新加载</Button>
+      <Button
+        className={ styles.buttonBottom }
+        onClick={ () => {
+          navigateTo({
+            url: '/pages/reloadUpdateII/index'
+          })
+        } }
+      >销毁-改变数据(by属性)-重新加载</Button>
       <Button
         className={ styles.buttonBottom }
         onClick={ () => {
@@ -68,6 +85,12 @@ export default () => {
           setUseGlobalThemes(!useGlobalThemes);
         } }
       >设置全局默认主题</Button>
+      <Button
+        className={ styles.button }
+        onClick={ () => {
+          setCount(count + 1);
+        } }
+      >{ count }</Button>
     </View>
   );
 };

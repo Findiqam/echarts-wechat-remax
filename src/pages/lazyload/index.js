@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button } from 'remax/wechat';
+import { View, Button } from 'remax/wechat';
 import styles from './index.css';
 import EcCanvas, { ecTool } from "../../components/ec-canvas";
 
@@ -63,7 +63,7 @@ export default () => {
                     id='lazyload'
                     canvasId='lazyload'
                     lazyLoad={ true }
-                    defaultOption={ defaultOption }
+                    option={ defaultOption }
                     theme='biBlue'
                 />
             </View>

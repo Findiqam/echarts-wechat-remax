@@ -62,7 +62,7 @@ export default () => {
                 <EcCanvas
                     id='simple'
                     canvasId='simple'
-                    defaultOption={ defaultOption }
+                    option={ defaultOption }
                 />
             </View>
             <Button

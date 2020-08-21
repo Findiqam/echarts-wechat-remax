@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { View, Text, Button } from 'remax/wechat';
-import styles from './index.css';
+import { View } from 'remax/wechat';
 import EcCanvas from "../../components/ec-canvas";
 /**
  * 注意，设置的主题必须是已注册过的主题，如何定制主题见echarts官网以及themes.js
@@ -63,7 +62,7 @@ export default () => {
             <EcCanvas
                 id='setTheme'
                 canvasId='setTheme'
-                defaultOption={ defaultOption }
+                option={ defaultOption }
                 theme='biBlue'
             />
         </View>
