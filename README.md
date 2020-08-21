@@ -1,3 +1,5 @@
+# V1.0.0  
+
 # Remax Wechat
 
 使用 Remax 开发微信小程序。
