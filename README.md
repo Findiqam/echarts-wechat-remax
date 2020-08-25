@@ -1,4 +1,4 @@
-# V1.1.0  
+# V2.0.0  
 
 defaultOption属性改为option，现在你可以直接通过属性option更新图表数据。当然如果你不想使用属性option，对于未加载的图表你也可以用ecTool.setOption来提前为其设置option。
 
