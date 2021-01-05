@@ -302,23 +302,59 @@ function getChart(id) {
  * 根据EcCanvas组件id设置其初始option；   
  * 为什么要提供两种方法设置option？echarts的option一般情况下数据量都比较大，当你使用状态管理时，
  * 我们希望不要将option传来传去，
- * 因此提供这个方法让你可以直接在model中设置option而不需要将他传到视图组件中去设置
+ * 因此提供这个方法让你可以直接在model中设置option而不需要将他传到视图组件中去设置；  
+ * notMerge指定了option是替换还是合并
  * @param {String} id 
  * @param {Object} option 
+ * @param {Boolean} notMerge 
  */
-function setOption(id, option) {
+function setOption(id, option, notMerge) {
     if (ecCharts[id]) {
         if (ecCharts[id].chart) {
-            ecCharts[id].chart.setOption(option);
+            ecCharts[id].chart.setOption(option, notMerge);
         }
-        ecCharts[id].option = option;
+        if (notMerge) {
+            ecCharts[id].option = option;
+        } else {
+            ecCharts[id].option = mergeObject(ecCharts[id].option, option, ['data', 'dataset.*']);
+        }
     } else {
         ecCharts[id] = {
             option
         };
     }
 }
-
+/**
+ * 将object2合并至object1，notMerge传入一个字符串数组，指定要替换而非合并的属性（例：['attr', 'attr1.attr2', 'attr3.*']）
+ * @param {Object} object1 
+ * @param {Object} object2 
+ * @param {*} notMerge 
+ * @param {String} chainPath 
+ */
+function mergeObject(object1, object2, notMerge, chainPath) {
+    chainPath = chainPath ? chainPath : 'object1';
+    if (typeof object1 === 'object') {
+        if (notMerge) {
+            for (let i = 0; i < notMerge.length; i += 1) {
+                if (notMerge[i].includes('*')) {
+                    if (chainPath.substring(0, chainPath.lastIndexOf('.')).includes(notMerge[i].split('.*')[0])) {
+                        return object2;
+                    }
+                } else {
+                    if (chainPath.includes(notMerge[i])) {
+                        return object2;
+                    }
+                }
+            }
+        }
+        Object.keys(object2).map((v) => {
+            object1[v] = mergeObject(object1[v], object2[v], notMerge, `${chainPath}.${v}`);
+        });
+        return object1;
+    } else {
+        return object2;
+    }
+}
 /**
  * 根据EcCanvas组件id获取其初始option
  * @param {String} id 
